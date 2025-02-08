@@ -1,8 +1,0 @@
-let messages = [];
-
-function sendAnonText() {
-  const message = document.getElementById('anon-input').value;
-  if (message.trim() !== '') {
-    messages.push(message);
-    const newMessage = document.createElement('div');
-[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/emmanueld45/ogapredictor/tree/e226e536d5fe2941a20095b7dc8d31fac44a963e/template.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/rafaelhuntstokes/ticketing/tree/1ead9ee40eba829ecb1816b4dd4726cdbae6f296/htmlStuff.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "2")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/timothyorvin/taspencorpu4/tree/6916c891cfc894dc97cf260c3cdad000f6694ad6/resources%2Fviews%2Fupload.blade.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "3")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/azkanab/pokedex/tree/de98e1e9386034ef0442e38ed4f4b8d7f1a80ccf/src%2Fstyle%2FMyPokemon%2FRemoveModal.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "4")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/fazush/FazilatSayt/tree/5d5e143e73c34c4422955c576c9e8dd60625fe5f/Cstyle.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "5")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/DMCE606/aviraljain606.github.io/tree/32be65881ec5c71da56ec91f75d7ff2bef27da77/courses.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "6")
