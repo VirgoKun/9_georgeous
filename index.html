@@ -144,15 +144,36 @@
   <script>
     function sendAnonText() {
       const message = document.getElementById('anon-input').value;
+      const timestamp = new Date().getTime();
+      const messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
+
       if (message.trim() !== '') {
-        const messagesDiv = document.getElementById('anon-messages');
-        const newMessage = document.createElement('div');
-        newMessage.className = 'bg-gray-700 p-2 rounded mt-2';
-        newMessage.textContent = message;
-        messagesDiv.appendChild(newMessage);
+        messages.push({ message, timestamp });
+        localStorage.setItem('anonMessages', JSON.stringify(messages));
+        displayMessages();
         document.getElementById('anon-input').value = '';
       }
     }
+
+    function displayMessages() {
+      const messagesDiv = document.getElementById('anon-messages');
+      const messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
+      const currentTime = new Date().getTime();
+      const validMessages = messages.filter(msg => (currentTime - msg.timestamp) <= 168 * 60 * 60 * 1000); // 168 hours in milliseconds
+
+      messagesDiv.innerHTML = '';
+      validMessages.forEach(msg => {
+        const newMessage = document.createElement('div');
+        newMessage.className = 'bg-gray-700 p-2 rounded mt-2';
+        newMessage.textContent = msg.message;
+        messagesDiv.appendChild(newMessage);
+      });
+
+      localStorage.setItem('anonMessages', JSON.stringify(validMessages));
+    }
+
+    // Display messages on page load
+    window.onload = displayMessages;
   </script>
 </body>
-  </html>
+        </html>
