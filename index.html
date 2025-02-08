@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>XII TKJ 3</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    .anon-box {
+      background-color: #1a1a1a;
+      padding: 16px;
+      margin-top: 16px;
+      border-radius: 8px;
+    }
+    .bg-light-gray {
+      background-color: #2c2c2c;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #1a1a1a;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      border-radius: 10px;
+    }
+  </style>
+  <script src="scripts.js"></script>
+</head>
+<body class="bg-light-gray text-white">
+  <header class="relative">
+    <img alt="Class background image" class="w-full h-64 object-cover opacity-50" height="300" src="https://i.supa.codes/IWGxe" width="720"/>
+    <div class="absolute inset-0 flex flex-col items-center justify-center">
+      <div class="flex justify-between w-full px-4">
+        <i class="fas fa-bars text-2xl" onclick="toggleMenu()"></i>
+        <i class="fas fa-user-circle text-2xl"></i>
+      </div>
+      <div id="menu" class="hidden flex flex-col items-start mt-4 space-y-2 px-4">
+        <button class="text-xl" onclick="showMessages()">Message</button>
+      </div>
+      <p class="mt-4">Hi, visitor!</p>
+      <h1 class="text-2xl font-bold">WELCOME</h1>
+      <h2 class="text-4xl font-bold mt-2">IX GEORGEOUS</h2>
+      <div class="flex mt-4 space-x-4">
+        <div class="bg-gray-800 rounded-full px-4 py-2 text-center">
+          <p class="text-2xl font-bold text-blue-400">17♐</p>
+        </div>
+        <div class="bg-gray-800 rounded-full px-4 py-2 text-center">
+          <p class="text-2xl font-bold text-pink-400">18♉</p>
+        </div>
+        <div class="bg-gray-800 rounded-full px-4 py-2 text-center">
+          <p class="text-2xl font-bold text-red-400">2022</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="px-4 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
+        <i class="fab fa-instagram text-2xl"></i>
+        <div>
+          <p>Class Instagram</p>
+          <p class="text-sm text-gray-400"><a href="https://www.instagram.com/9__georgeous" target="_blank">View More</a></p>
+        </div>
+        <i class="fas fa-chevron-right text-2xl"></i>
+      </div>
+      <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
+        <i class="fas fa-paper-plane text-2xl"></i>
+        <div>
+          <p>Text Anonim</p>
+        </div>
+        <i class="fas fa-chevron-right text-2xl"></i>
+      </div>
+    </div>
+
+    <!-- Kolom text anonim di bawah button Instagram -->
+    <section class="anon-box">
+      <h2 class="text-xl font-bold">Text Anonim</h2>
+      <form id="anon-form">
+        <textarea id="anon-input" class="w-full bg-gray-700 text-white rounded p-2" rows="4" placeholder="Ketik pesan anonim..."></textarea>
+        <button type="button" onclick="sendAnonText()" class="bg-blue-500 rounded-full px-4 py-2 mt-2">Kirim</button>
+      </form>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-bold">Class Gallery</h2>
+      <div class="flex space-x-4 overflow-x-auto mt-4">
+        <img alt="Class event 1" class="rounded-lg" height="150" src="https://i.supa.codes/XNg_e" width="150"/>
+        <img alt="Class event 2" class="rounded-lg" height="150" src="https://i.supa.codes/qCP0-" width="150"/>
+        <img alt="Class event 3" class="rounded-lg" height="150" src="https://i.supa.codes/OyEND" width="150"/>
+        <img alt="Class event 4" class="rounded-lg" height="150" src="https://i.supa.codes/bl_Zi" width="150"/>
+      </div>
+      <div class="flex justify-center mt-4 space-x-4">
+        <button class="bg-gray-800 rounded-full px-4 py-2">Send</button>
+        <button class="bg-gray-800 rounded-full px-4 py-2">Request</button>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-bold">Structure & Schedule</h2>
+      <div class="mt-4">
+        <div class="flex justify-center">
+          <div class="text-center">
+            <p class="font-bold">Wali Kelas</p>
+            <p>Abdul Wahab S.Pdi</p>
+          </div>
+        </div>
+        <div class="flex justify-center mt-4">
+          <div class="text-center mx-4">
+            <p class="font-bold">Ketua Kelas</p>
+            <p>Ragil</p>
+          </div>
+          <div class="text-center mx-4">
+            <p class="font-bold">Wakil Ketua</p>
+            <p>Abi</p>
+          </div>
+        </div>
+        <div class="flex justify-center mt-4">
+          <div class="text-center mx-4">
+            <p class="font-bold">Sekertaris</p>
+            <p>Anita</p>
+            <p>Nuya</p>
+          </div>
+          <div class="text-center mx-4">
+            <p class="font-bold">Bendahara</p>
+            <p>Azka</p>
+            <p>Putri</p>
+          </div>
+        </div>
+        <div class="flex justify-center mt-4">
+          <div class="text-center mx-4">
+            <p class="font-bold">Keamanan</p>
+            <p>Rasya</p>
+            <p>Rasya</p>
+          </div>
+          <div class="text-center mx-4">
+            <p class="font-bold">Kebersihan</p>
+            <p>Rasya</p>
+            <p>Rasya</p>
+          </div>
+        </div>
+        <div class="flex justify-center mt-4">
+          <div class="text-center mx-4">
+            <p class="font-bold">Kesehatan</p>
+            <p>Rasya</p>
+          </div>
+          <div class="text-center mx-4">
+            <p class="font-bold">Kesehatan</p>
+            <p>Rasya</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for displaying messages -->
+  <div id="message-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 class="text-xl font-bold">Pesan Anonim</h2>
+      <div id="message-list"></div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
