@@ -16,40 +16,15 @@
     .bg-light-gray {
       background-color: #2c2c2c;
     }
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-      padding-top: 60px;
-    }
-    .modal-content {
-      background-color: #1a1a1a;
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      border-radius: 10px;
-    }
   </style>
-  <script src="scripts.js"></script>
 </head>
 <body class="bg-light-gray text-white">
   <header class="relative">
     <img alt="Class background image" class="w-full h-64 object-cover opacity-50" height="300" src="https://i.supa.codes/IWGxe" width="720"/>
     <div class="absolute inset-0 flex flex-col items-center justify-center">
       <div class="flex justify-between w-full px-4">
-        <i class="fas fa-bars text-2xl" onclick="toggleMenu()"></i>
+        <i class="fas fa-bars text-2xl"></i>
         <i class="fas fa-user-circle text-2xl"></i>
-      </div>
-      <div id="menu" class="hidden flex flex-col items-start mt-4 space-y-2 px-4">
-        <button class="text-xl" onclick="showMessages()">Message</button>
       </div>
       <p class="mt-4">Hi, visitor!</p>
       <h1 class="text-2xl font-bold">WELCOME</h1>
@@ -93,6 +68,7 @@
         <textarea id="anon-input" class="w-full bg-gray-700 text-white rounded p-2" rows="4" placeholder="Ketik pesan anonim..."></textarea>
         <button type="button" onclick="sendAnonText()" class="bg-blue-500 rounded-full px-4 py-2 mt-2">Kirim</button>
       </form>
+      <div id="anon-messages" class="mt-4"></div>
     </section>
 
     <section class="mt-8">
@@ -165,16 +141,18 @@
       </div>
     </section>
   </main>
-
-  <!-- Modal for displaying messages -->
-  <div id="message-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 class="text-xl font-bold">Pesan Anonim</h2>
-      <div id="message-list"></div>
-    </div>
-  </div>
-
-  <script src="scripts.js"></script>
+  <script>
+    function sendAnonText() {
+      const message = document.getElementById('anon-input').value;
+      if (message.trim() !== '') {
+        const messagesDiv = document.getElementById('anon-messages');
+        const newMessage = document.createElement('div');
+        newMessage.className = 'bg-gray-700 p-2 rounded mt-2';
+        newMessage.textContent = message;
+        messagesDiv.appendChild(newMessage);
+        document.getElementById('anon-input').value = '';
+      }
+    }
+  </script>
 </body>
-</html>
+  </html>
