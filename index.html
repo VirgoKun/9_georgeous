@@ -12,6 +12,7 @@
       padding: 16px;
       margin-top: 16px;
       border-radius: 8px;
+      display: none; /* Hide the anonymous text section by default */
     }
     .bg-light-gray {
       background-color: #2c2c2c;
@@ -44,6 +45,13 @@
   </header>
   <main class="px-4 py-8">
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between" onclick="toggleAnonBox()">
+        <i class="fas fa-paper-plane text-2xl"></i>
+        <div>
+          <p>Text Anonim</p>
+        </div>
+        <i class="fas fa-chevron-right text-2xl"></i>
+      </div>
       <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
         <i class="fab fa-instagram text-2xl"></i>
         <div>
@@ -52,17 +60,10 @@
         </div>
         <i class="fas fa-chevron-right text-2xl"></i>
       </div>
-      <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
-        <i class="fas fa-paper-plane text-2xl"></i>
-        <div>
-          <p>Text Anonim</p>
-        </div>
-        <i class="fas fa-chevron-right text-2xl"></i>
-      </div>
     </div>
 
     <!-- Kolom text anonim di bawah button Instagram -->
-    <section class="anon-box">
+    <section class="anon-box" id="anon-box">
       <h2 class="text-xl font-bold">Text Anonim</h2>
       <form id="anon-form">
         <textarea id="anon-input" class="w-full bg-gray-700 text-white rounded p-2" rows="4" placeholder="Ketik pesan anonim..."></textarea>
@@ -172,8 +173,6 @@
       localStorage.setItem('anonMessages', JSON.stringify(validMessages));
     }
 
-    // Display messages on page load
-    window.onload = displayMessages;
-  </script>
-</body>
-        </html>
+    function toggleAnonBox() {
+      const anonBox = document.getElementById('anon-box');
+      anonBox.style.display = anonBox.style.display === 'none' ? 'block'[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/emmanueld45/ogapredictor/tree/e226e536d5fe2941a20095b7dc8d31fac44a963e/template.php?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1")
