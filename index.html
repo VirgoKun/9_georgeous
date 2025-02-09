@@ -3,9 +3,13 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>XII TKJ 3</title>
+  <title>IX GEORGEOUS</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <!-- Firebase App (the core Firebase SDK) -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <!-- Firebase Realtime Database -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
   <style>
     .anon-box {
       background-color: #1a1a1a;
@@ -59,7 +63,7 @@
           <i class="fas fa-bars text-2xl cursor-pointer" onclick="toggleMenu()"></i>
           <div class="menu" id="menu">
             <button onclick="window.location.href='https://wa.me/6287767487253?text=.menu'">WhatsApp Bot</button>
-            <button onclick="window.location.href='https://wa.me/62895339261928'">Contact Rasya</button>
+            <button onclick="window.location.href='http://web-rasya.vercel.app/'">Contact Rasya</button>
           </div>
         </div>
         <i class="fas fa-user-circle text-2xl"></i>
@@ -103,7 +107,7 @@
     <section class="anon-box" id="anon-box">
       <h2 class="text-xl font-bold">Text Anonim</h2>
       <form id="anon-form">
-        <textarea id="anon-input" class="w-full bg-gray-700 text-white rounded p-2" rows="4" placeholder="Ketik pesan anonim..."></textarea>
+        <textarea id="anon-input" class="w-full bg-gray-700 text-white rounded p-2" rows="4" placeholder="Tinggalkan Pesan Untuk Ix Georgeous...."></textarea>
         <button type="button" onclick="sendAnonText()" class="bg-blue-500 rounded-full px-4 py-2 mt-2">Kirim</button>
       </form>
       <div id="anon-messages" class="mt-4"></div>
@@ -129,7 +133,7 @@
         <div class="flex justify-center">
           <div class="text-center">
             <p class="font-bold">Wali Kelas</p>
-            <p>Abdul Wahab S.Pdi</p>
+            <p>Mulyani.S.Pdi</p>
           </div>
         </div>
         <div class="flex justify-center mt-4">
@@ -162,52 +166,69 @@
           </div>
           <div class="text-center mx-4">
             <p class="font-bold">Kebersihan</p>
-            <p>Rasya</p>
-            <p>Rasya</p>
+            <p>Sabian</p>
+            <p>Diva</p>
           </div>
         </div>
         <div class="flex justify-center mt-4">
           <div class="text-center mx-4">
-            <p class="font-bold">Kesehatan</p>
-            <p>Rasya</p>
+            <p class="font-bold">Ketertiban</p>
+            <p>Rangga</p>
           </div>
           <div class="text-center mx-4">
-            <p class="font-bold">Kesehatan</p>
-            <p>Rasya</p>
+            <p class="font-bold">Kerohanian</p>
+            <p>Alif</p>
           </div>
         </div>
       </div>
     </section>
   </main>
   <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      databaseURL: "YOUR_DATABASE_URL",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
     function sendAnonText() {
       const message = document.getElementById('anon-input').value;
       const timestamp = new Date().getTime();
-      const messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
 
       if (message.trim() !== '') {
-        messages.push({ message, timestamp });
-        localStorage.setItem('anonMessages', JSON.stringify(messages));
-        displayMessages();
+        database.ref('messages').push({
+          message: message,
+          timestamp: timestamp
+        });
         document.getElementById('anon-input').value = '';
       }
     }
 
     function displayMessages() {
       const messagesDiv = document.getElementById('anon-messages');
-      const messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
-      const currentTime = new Date().getTime();
-      const validMessages = messages.filter(msg => (currentTime - msg.timestamp) <= 168 * 60 * 60 * 1000); // 168 hours in milliseconds
+      database.ref('messages').on('value', (snapshot) => {
+        const messages = [];
+        snapshot.forEach((childSnapshot) => {
+          const msg = childSnapshot.val();
+          messages.push(msg);
+        });
 
-      messagesDiv.innerHTML = '';
-      validMessages.forEach(msg => {
-        const newMessage = document.createElement('div');
-        newMessage.className = 'bg-gray-700 p-2 rounded mt-2';
-        newMessage.textContent = msg.message;
-        messagesDiv.appendChild(newMessage);
+        messagesDiv.innerHTML = '';
+        messages.forEach(msg => {
+          const newMessage = document.createElement('div');
+          newMessage.className = 'bg-gray-700 p-2 rounded mt-2';
+          newMessage.textContent = msg.message;
+          messagesDiv.appendChild(newMessage);
+        });
       });
-
-      localStorage.setItem('anonMessages', JSON.stringify(validMessages));
     }
 
     function toggleAnonBox() {
