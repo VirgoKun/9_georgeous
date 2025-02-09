@@ -1,7 +1,7 @@
 async function fetchMessages() {
-  const response = await fetch(`https://api.github.com/repos/${process.env.GITHUB_REPOSITORY}/contents/${process.env.GITHUB_FILE_PATH}`, {
+  const response = await fetch(`https://api.github.com/repos/${process.env.9_georgeous}/contents/${process.env.messages.json}`, {
     headers: {
-      Authorization: `token ${process.env.GITHUB_TOKEN}`
+      Authorization: `token ${process.env.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}`
     }
   });
   const data = await response.json();
@@ -10,10 +10,10 @@ async function fetchMessages() {
 }
 
 async function updateMessages(newMessages) {
-  const response = await fetch(`https://api.github.com/repos/${process.env.GITHUB_REPOSITORY}/contents/${process.env.GITHUB_FILE_PATH}`, {
+  const response = await fetch(`https://api.github.com/repos/${process.env.9_georgeous}/contents/${process.env.messgaes.json}`, {
     method: 'PUT',
     headers: {
-      Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      Authorization: `token ${process.env.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}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -48,4 +48,4 @@ async function displayMessages() {
     newMessage.textContent = msg.message;
     messagesDiv.appendChild(newMessage);
   });
-}
+        }
