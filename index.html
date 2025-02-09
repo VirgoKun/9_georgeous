@@ -185,10 +185,14 @@
       const timestamp = new Date().getTime();
 
       if (message.trim() !== '') {
+        // Ambil data yang sudah ada dari file JSON
         const response = await fetch('messages.json');
         const messages = await response.json();
+
+        // Tambahkan pesan baru
         messages.push({ message, timestamp });
 
+        // Simpan kembali ke file JSON (simulasi)
         await fetch('messages.json', {
           method: 'POST',
           headers: {
@@ -197,17 +201,22 @@
           body: JSON.stringify(messages),
         });
 
+        // Tampilkan pesan
         displayMessages();
         document.getElementById('anon-input').value = '';
       }
     }
 
     async function displayMessages() {
+      // Ambil data dari file JSON
       const response = await fetch('messages.json');
       const messages = await response.json();
-      const currentTime = new Date().getTime();
-      const validMessages = messages.filter(msg => (currentTime - msg.timestamp) <= 168 * 60 * 60 * 1000); // 168 hours in milliseconds
 
+      // Filter pesan yang masih valid (dalam 168 jam)
+      const currentTime = new Date().getTime();
+      const validMessages = messages.filter(msg => (currentTime - msg.timestamp) <= 168 * 60 * 60 * 1000);
+
+      // Tampilkan pesan di halaman
       const messagesDiv = document.getElementById('anon-messages');
       messagesDiv.innerHTML = '';
       validMessages.forEach(msg => {
@@ -217,6 +226,7 @@
         messagesDiv.appendChild(newMessage);
       });
 
+      // Simpan kembali pesan yang valid ke file JSON (simulasi)
       await fetch('messages.json', {
         method: 'POST',
         headers: {
@@ -236,7 +246,7 @@
       menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
     }
 
-    // Display messages on page load
+    // Tampilkan pesan saat halaman dimuat
     displayMessages();
   </script>
 </body>
