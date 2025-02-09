@@ -180,25 +180,35 @@
     </section>
   </main>
   <script>
-    function sendAnonText() {
+    async function sendAnonText() {
       const message = document.getElementById('anon-input').value;
       const timestamp = new Date().getTime();
-      const messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
 
       if (message.trim() !== '') {
+        const response = await fetch('messages.json');
+        const messages = await response.json();
         messages.push({ message, timestamp });
-        localStorage.setItem('anonMessages', JSON.stringify(messages));
+
+        await fetch('messages.json', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(messages),
+        });
+
         displayMessages();
         document.getElementById('anon-input').value = '';
       }
     }
 
-    function displayMessages() {
-      const messagesDiv = document.getElementById('anon-messages');
-      const messages = JSON.parse(localStorage.getItem('anonMessages')) || [];
+    async function displayMessages() {
+      const response = await fetch('messages.json');
+      const messages = await response.json();
       const currentTime = new Date().getTime();
       const validMessages = messages.filter(msg => (currentTime - msg.timestamp) <= 168 * 60 * 60 * 1000); // 168 hours in milliseconds
 
+      const messagesDiv = document.getElementById('anon-messages');
       messagesDiv.innerHTML = '';
       validMessages.forEach(msg => {
         const newMessage = document.createElement('div');
@@ -207,7 +217,13 @@
         messagesDiv.appendChild(newMessage);
       });
 
-      localStorage.setItem('anonMessages', JSON.stringify(validMessages));
+      await fetch('messages.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validMessages),
+      });
     }
 
     function toggleAnonBox() {
@@ -224,4 +240,4 @@
     displayMessages();
   </script>
 </body>
-  </html>
+</html>
